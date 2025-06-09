@@ -1,47 +1,48 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Button } from 'react-native';
 
-export default function ProductCard({ image, name, description }) {
+const ProductCard = ({ image, name, description, price, onPress }) => {
     return (
-        <View style={styles.card}>
-            <Image source={image} style={styles.image} />
-            <Text style={styles.name}>{name}</Text>
-            <Text style={styles.description}>{description}</Text>
-            <Button title="Bekijk" onPress={() => alert(`${name} geselecteerd`)} />
-        </View>
+        <TouchableOpacity onPress={onPress}>
+            <View style={styles.card}>
+                <Image source={image} style={styles.image} />
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.description}>{description}</Text>
+                <Text style={styles.price}>€ {price}</Text>
+                <Button title="Bekijk product" onPress={onPress} />
+            </View>
+        </TouchableOpacity>
     );
-}
+};
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: 'white',
-        borderRadius: 12,
-        padding: 16,
-        marginBottom: 16,
-        width: '100%',
-        maxWidth: 300,
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 4,
-        elevation: 3,
+        marginBottom: 20,
+        backgroundColor: '#f2f2f2',
+        borderRadius: 10,
+        padding: 15,
     },
     image: {
-        width: 150,
+        width: '100%',
         height: 150,
-        borderRadius: 8,
-        marginBottom: 8,
+        marginBottom: 10,
+        borderRadius: 10,
     },
     name: {
-        fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 4,
+        fontSize: 18,
     },
     description: {
         fontSize: 14,
-        color: '#555',
-        marginBottom: 8,
-        textAlign: 'center',
+        marginBottom: 5,
+    },
+    price: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        marginBottom: 10,
     },
 });
+
+export default ProductCard;
+// This component is used to display a product card with an image, name, description, and price.
+// It also includes a button to view the product details, which triggers the onPress function passed as a prop.

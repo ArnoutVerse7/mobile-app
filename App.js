@@ -1,44 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import ProductCard from './components/ProductCard';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-// ✅ Lokale afbeeldingen importeren
-import kitsImage from './images/Kits.avif';
-import retroImage from './images/Retro.webp';
-import trainingImage from './images/training.webp';
+import HomeScreen from './screens/HomeScreen';
+import ProductDetails from './screens/ProductDetails';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Onze Producten</Text>
-      <ProductCard 
-        image={kitsImage}
-        name="Kits"
-        description="These are our kits."
-      />
-      <ProductCard 
-        image={retroImage}
-        name="Retro Kits"
-        description="Retro Kits from everywhere."
-      />
-      <ProductCard 
-        image={trainingImage}
-        name="Training Gear"
-        description="Find the training gear for you."
-      />
-    </ScrollView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="ProductDetails" component={ProductDetails} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    backgroundColor: '#f5f5f5',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-});
