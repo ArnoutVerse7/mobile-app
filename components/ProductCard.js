@@ -15,7 +15,7 @@ const ProductCard = ({ image, name, description, price, onPress }) => {
                     activeOpacity={0.8}
                     style={styles.button}
                 >
-                    <Text style={styles.buttonText}>Bekijk product</Text>
+                    <Text style={styles.buttonText}>Shop Product</Text>
                 </TouchableOpacity>
             </View>
         </TouchableOpacity>
