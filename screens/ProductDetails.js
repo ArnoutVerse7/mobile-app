@@ -10,14 +10,18 @@ const ProductDetails = ({ route }) => {
         if (quantity > 1) setQuantity(quantity - 1);
     };
 
-    const totalPrice = (product.price * quantity).toFixed(2);
+    const unitPrice = Number(product.price) || 0;
+    const totalPrice = (unitPrice * quantity).toFixed(2);
 
     return (
         <View style={styles.container}>
-            <Image source={product.image} style={styles.image} />
-            <Text style={styles.name}>{product.name}</Text>
-            <Text style={styles.description}>{product.description}</Text>
-            <Text style={styles.price}>€ {product.price.toFixed(2)}</Text>
+            {product.image?.uri && (
+                <Image source={product.image} style={styles.image} />
+            )}
+
+            <Text style={styles.name}>{product.name || product.title}</Text>
+            <Text style={styles.description}>{product.description || product.subtitle}</Text>
+            <Text style={styles.price}>€ {unitPrice.toFixed(2)}</Text>
 
             <View style={styles.quantityContainer}>
                 <Button title="-" onPress={decrease} />

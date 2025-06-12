@@ -1,15 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 const ProductCard = ({ image, name, description, price, onPress }) => {
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPress} activeOpacity={0.95}>
             <View style={styles.card}>
                 <Image source={image} style={styles.image} />
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.description}>{description}</Text>
                 <Text style={styles.price}>€ {price}</Text>
-                <Button title="Bekijk product" onPress={onPress} />
+
+                <TouchableOpacity
+                    onPress={onPress}
+                    activeOpacity={0.8}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>Bekijk product</Text>
+                </TouchableOpacity>
             </View>
         </TouchableOpacity>
     );
@@ -18,9 +25,9 @@ const ProductCard = ({ image, name, description, price, onPress }) => {
 const styles = StyleSheet.create({
     card: {
         marginBottom: 20,
-        backgroundColor: '#f2f2f2',
         borderRadius: 10,
         padding: 15,
+        backgroundColor: '#f5f5f5',
     },
     image: {
         width: '100%',
@@ -31,9 +38,11 @@ const styles = StyleSheet.create({
     name: {
         fontWeight: 'bold',
         fontSize: 18,
+        color: '#222',
     },
     description: {
         fontSize: 14,
+        color: '#555',
         marginBottom: 5,
     },
     price: {
@@ -41,8 +50,16 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 10,
     },
+    button: {
+        backgroundColor: '#ff6f00', // oranje
+        paddingVertical: 10,
+        borderRadius: 8,
+    },
+    buttonText: {
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
 });
 
 export default ProductCard;
-// This component is used to display a product card with an image, name, description, and price.
-// It also includes a button to view the product details, which triggers the onPress function passed as a prop.
