@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, StyleSheet, View } from 'react-native';
+import { ScrollView, Text, StyleSheet, View, Image } from 'react-native';
 
 const AboutUsScreen = () => {
   return (
@@ -33,6 +33,20 @@ const AboutUsScreen = () => {
         What began with collecting shirts from the 90s quickly grew into a webshop for other fans. Today, we ship
         shirts all across Belgium and far beyond.
       </Text>
+
+      <Text style={styles.subheader}>Who we are</Text>
+      <View style={styles.profileContainer}>
+        <Image
+          source={require('../images/avatar.png')}
+          style={styles.avatar}
+        />
+        <View style={styles.profileText}>
+          <Text style={styles.name}>Arnout Versé - Founder</Text>
+          <Text style={styles.bio}>
+            Full-time football fanatic and shirt collector. Passionate about vintage kits, football history, and Belgian club culture.
+          </Text>
+        </View>
+      </View>
     </ScrollView>
   );
 };
@@ -40,7 +54,7 @@ const AboutUsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    paddingTop: 35, // toegevoegd voor dezelfde spacing als andere schermen
+    paddingTop: 35,
     backgroundColor: '#fff',
   },
   header: {
@@ -59,6 +73,32 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     marginBottom: 12,
     color: '#333',
+  },
+  profileContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 15,
+    padding: 12,
+    borderRadius: 10,
+  },
+  avatar: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    marginRight: 15,
+  },
+  profileText: {
+    flex: 1,
+  },
+  name: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: 4,
+  },
+  bio: {
+    fontSize: 14,
+    color: '#444',
+    lineHeight: 20,
   },
 });
 
