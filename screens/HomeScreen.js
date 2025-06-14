@@ -1,13 +1,18 @@
+// Dit is het startscherm van de app met een hero-afbeelding, een overzicht van producten en blogs.
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native';
 import ProductCard from '../components/ProductCard';
-import BlogCard from '../components/BlogCard'; // Zorg dat je deze component hebt
+import BlogCard from '../components/BlogCard';
+
+const screenWidth = Dimensions.get('window').width;
 
 const HomeScreen = ({ navigation }) => {
+    // State voor producten, blogs en laden
     const [products, setProducts] = useState([]);
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // Haal producten en blogs op uit de API
     useEffect(() => {
         Promise.all([
             fetch('https://api.webflow.com/v2/sites/67abaae39a449d1e22641632/products', {
@@ -22,6 +27,7 @@ const HomeScreen = ({ navigation }) => {
             }).then(res => res.json()),
         ])
             .then(([productData, blogData]) => {
+                // Formatteer producten en blogs
                 const formattedProducts = productData.items.map(item => ({
                     id: item.product.id,
                     title: item.product.fieldData.name,
@@ -35,10 +41,9 @@ const HomeScreen = ({ navigation }) => {
                     content: item.fieldData['maintext'],
                     image: item.fieldData['evoshirts']?.url,
                 }));
-                setProducts(formattedProducts.slice(0, 2)); // alleen eerste 2
+                setProducts(formattedProducts.slice(0, 2));
                 setBlogs(formattedBlogs.slice(0, 2));
             })
-            .catch(err => console.error('Fout bij ophalen homepage data:', err))
             .finally(() => setLoading(false));
     }, []);
 
@@ -48,7 +53,23 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.header}>Our shirts</Text>
+            {/* Hero Section */}
+            <View style={styles.hero}>
+                <Image
+                    source={require('../images/banner.png')}
+                    style={styles.heroImage}
+                    resizeMode="cover"
+                />
+                {/* Overlay en tekst over de afbeelding */}
+                <View style={styles.heroOverlay} />
+                <View style={styles.heroTextContainer}>
+                    <Text style={styles.heroTitle}>Welcome to Football Shirt Shop</Text>
+                    <Text style={styles.heroSubtitle}>Discover the latest shirts and blogs!</Text>
+                </View>
+            </View>
+
+            {/* Overzicht van producten */}
+            <Text style={styles.header}>Our Shirts</Text>
             {products.map(product => (
                 <ProductCard
                     key={product.id}
@@ -63,6 +84,7 @@ const HomeScreen = ({ navigation }) => {
                 <Text style={styles.buttonText}>Shop more</Text>
             </TouchableOpacity>
 
+            {/* Overzicht van blogs */}
             <Text style={styles.header}>Latest blog posts</Text>
             {blogs.map((post, index) => (
                 <BlogCard
@@ -81,6 +103,54 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: { padding: 20 },
+    hero: {
+        width: '100%',
+        height: 160,
+        marginBottom: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+    },
+    heroImage: {
+        width: screenWidth - 40, // Volledige breedte binnen de padding
+        height: 160,
+        borderRadius: 16,
+    },
+    heroOverlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: screenWidth - 40,
+        height: 160,
+        borderRadius: 16,
+        backgroundColor: 'rgba(0,0,0,0.25)',
+    },
+    heroTextContainer: {
+        position: 'absolute',
+        width: screenWidth - 40,
+        height: 160,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 16,
+    },
+    heroTitle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: '#fff',
+        textAlign: 'center',
+        textShadowColor: 'rgba(0,0,0,0.3)',
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowRadius: 4,
+    },
+    heroSubtitle: {
+        fontSize: 15,
+        color: '#fff',
+        textAlign: 'center',
+        marginTop: 4,
+        textShadowColor: 'rgba(0,0,0,0.3)',
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowRadius: 4,
+    },
     header: { fontSize: 22, fontWeight: 'bold', marginVertical: 15 },
     button: {
         backgroundColor: '#FF6F00',

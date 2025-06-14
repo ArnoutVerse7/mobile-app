@@ -1,15 +1,22 @@
+// Dit component toont één product als een kaartje met afbeelding, naam, beschrijving, prijs en een knop.
+// Props: image, name, description, price, onPress
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 const ProductCard = ({ image, name, description, price, onPress }) => {
     return (
+        // Hele kaart is klikbaar
         <TouchableOpacity onPress={onPress} activeOpacity={0.95}>
             <View style={styles.card}>
+                {/* Productafbeelding */}
                 <Image source={image} style={styles.image} />
+                {/* Productnaam */}
                 <Text style={styles.name}>{name}</Text>
+                {/* Korte beschrijving */}
                 <Text style={styles.description}>{description}</Text>
+                {/* Prijs */}
                 <Text style={styles.price}>€ {price}</Text>
-
+                {/* Shop-knop */}
                 <TouchableOpacity
                     onPress={onPress}
                     activeOpacity={0.8}

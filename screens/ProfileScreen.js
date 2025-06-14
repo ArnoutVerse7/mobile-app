@@ -1,9 +1,10 @@
+// Dit scherm toont een gebruikersprofiel met naam, foto en korte info.
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 const ProfileScreen = () => {
   const handleSettingsPress = () => {
-    Alert.alert('Instellingen', 'Instellingenpagina komt hier binnenkort 😉');
+    // Hier kun je eventueel navigeren naar instellingen
   };
 
   return (
@@ -14,13 +15,16 @@ const ProfileScreen = () => {
         </TouchableOpacity>
       </View>
 
+      {/* Profielfoto */}
       <Image
         source={require('../images/avatar.png')}
         style={styles.avatar}
       />
+      {/* Naam en rol */}
       <Text style={styles.name}>Arnout Versé</Text>
       <Text style={styles.role}>Founder of Football Shirt Shop</Text>
 
+      {/* Over mij */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>About Me</Text>
         <Text style={styles.text}>
@@ -48,7 +52,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   headerTitle: {
-    fontSize: 16,
     fontWeight: 'bold',
     color: '#6A1B9A',
   },
@@ -63,12 +66,12 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   name: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   role: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#666',
     marginBottom: 30,
     textAlign: 'center',
@@ -81,10 +84,10 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontWeight: 'bold',
     marginBottom: 8,
-    fontSize: 16,
+    fontSize: 18,
   },
   text: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#444',
     lineHeight: 20,
   },

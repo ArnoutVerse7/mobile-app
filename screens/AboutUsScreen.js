@@ -1,3 +1,4 @@
+// Dit scherm geeft informatie over het bedrijf en de oprichter.
 import React from 'react';
 import { ScrollView, Text, StyleSheet, View, Image } from 'react-native';
 
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   header: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 16,
   },

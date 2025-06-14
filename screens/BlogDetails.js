@@ -1,7 +1,9 @@
+// Dit scherm toont de details van één blogpost.
 import React from 'react';
 import { View, Text, ScrollView, Image, StyleSheet } from 'react-native';
 
 const BlogDetails = ({ route }) => {
+    // Haal de blogpost op uit de route parameters
     const { post } = route.params;
 
     // Verwijder alle HTML-tags zoals <li>, <p>, etc.
@@ -9,7 +11,9 @@ const BlogDetails = ({ route }) => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
+            {/* Blogafbeelding */}
             {post.image && <Image source={{ uri: post.image }} style={styles.image} />}
+            {/* Titel en inhoud */}
             <Text style={styles.title}>{post.title}</Text>
             <Text style={styles.content}>{plainText}</Text>
         </ScrollView>
